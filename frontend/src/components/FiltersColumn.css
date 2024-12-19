@@ -1,0 +1,102 @@
+/* Filters Column Container */
+.filters-column {
+  position: -webkit-sticky; /* For Safari */
+  position: sticky;
+  top: 1rem;
+  z-index: 1000; /* Adjust as needed */
+  width: 100%;
+  height: fit-content;
+  max-width: 300px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Title */
+.filters-column h4 {
+  margin-bottom: 16px;
+  font-size: 1.2rem;
+  color: white;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+/* Label Styling */
+.filters-column label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: gray;
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* Dropdown Styling */
+.filters-column .dropdown {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #333;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.filters-column .dropdown:focus {
+  border-color: #00997f;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
+  outline: none;
+}
+
+/* Apply Filters Button */
+.filters-column .apply-filters {
+  width: 100%;
+  padding: 10px 0;
+  background-color: #00c8a8;
+  color: black;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.filters-column .apply-filters:hover {
+  background-color: #00997f;
+}
+
+/* Clear Filters Button */
+.filters-column .clear-filters {
+  width: 100%;
+  padding: 10px 0;
+  background-color: #757575;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  margin-top: 8px;
+}
+
+.filters-column .clear-filters:hover {
+  background-color: #5a6268;
+}
+
+/* General Element Spacing */
+.filters-column div {
+  margin-bottom: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .filters-column {
+    max-width: 100%;
+    padding: 16px;
+  }
+}

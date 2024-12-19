@@ -1,0 +1,96 @@
+
+.navbar {
+  background-color: #242424;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.navbar-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar-links .nav-link {
+  color: #333;
+  font-size: 1rem;
+  text-transform: uppercase;
+  margin: 5px;
+}
+
+.searchbar {
+  flex: 1;
+  max-width: 100%;
+  margin: 10px;
+}
+
+button {
+  margin: 0 5px;
+}
+
+.navbar-button {
+  padding: 8px 16px;
+  background-color: #00c8a8;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.navbar-button:hover {
+  background-color: #00997f;
+}
+
+.navbar-button-outline {
+  padding: 8px 16px;
+  background-color: transparent;
+  color: #00c8a8;
+  border: 2px solid #00c8a8;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.navbar-button-outline:hover {
+  background-color: #00c8a8;
+  color: black;
+}
+
+.login-modal .modal-title {
+  text-align: center;
+}
+
+.login-modal .modal-body {
+  margin-top: 10px;
+}
+
+/* Hide extra padding and adjust button spacing on smaller screens */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .navbar-links {
+    width: 100%;
+    justify-content: space-around;
+  }
+  .navbar-links .nav-link {
+    font-size: 14px;
+    margin: 5px 0;
+  }
+  button {
+    margin: 5px 0;
+  }
+}
+
+/* Search bar alignment for larger screens */
+@media (min-width: 992px) {
+  .searchbar {
+    margin-right: 10px;
+  }
+}

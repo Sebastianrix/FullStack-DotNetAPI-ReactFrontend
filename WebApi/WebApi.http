@@ -1,0 +1,67 @@
+@WebApi_HostAddress = https://localhost:5003
+
+//Create a user. Encryption is done on the password before it is stored in the database.
+POST {{WebApi_HostAddress}}/api/v3/user/register
+Accept: application/json
+Content-Type: application/json
+{
+  "name" : "GuestGuest",
+  "username" : "Guest",
+  "email" : "Guest@Hotmail.com",
+  "password" : "@Guest123",
+  "role" : "user"
+}
+
+###
+//Create admin user
+POST {{WebApi_HostAddress}}/api/v3/user/register
+Accept: application/json
+Content-Type: application/json
+{
+  "name" : "Adam Admin",
+  "username" : "userAdmin",
+  "email" : "user@AminMail.com",
+  "password" : "@Guest123",
+  "role" : "admin"
+}
+
+###
+
+//Login to User - Copy returned token and paste in Authorization header
+PUT {{WebApi_HostAddress}}/api/v3/user/login
+Accept: application/json
+Content-Type: application/json
+{
+  "userName" : "Guest",
+  "password" : "@Guest123"
+}
+
+###
+
+//Login to Admin - Copy returned token and paste in Authorization header
+PUT {{WebApi_HostAddress}}/api/v3/user/Login
+Accept: application/json
+Content-Type: application/json
+{
+  "userName" : "userAdmin",
+  "password" : "Guest123"
+}
+
+### 
+
+//Logout  - Copy returned token and paste in Authorization header
+POST {{WebApi_HostAddress}}/api/v3/user/logout
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiR3Vlc3QiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwiSWQiOiIxIiwiZXhwIjoxNzMzOTE2OTg3fQ.1xLjbE4vpK1nVb-xqPQxoo1f61FVNtYQrce2R5OHWdbdEvan1CTzGrvLrjD1baw_v-go_2wulrAMKC_f8kD4gg
+
+###
+
+GET {{WebApi_HostAddress}}/api/NameBasic
+Accept: application/json
+
+###
+
+GET {{WebApi_HostAddress}}/api/NameBasic/nm0000138
+Accept: application/json
+
+###

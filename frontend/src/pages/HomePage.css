@@ -1,0 +1,126 @@
+/* Global Styles */
+.homepage {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+/* Section Titles */
+.editors-choice h1,
+.media-list h2 {
+  font-size: 1.5rem;
+  color: lightgray;
+  margin-left: 3rem;
+  margin-bottom: 0px;
+}
+
+/* Grid Layout */
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  gap: 1rem;
+  padding: 0px 0;
+}
+
+/* Card Styles */
+.home-card {
+  display: block;
+  overflow: visible;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-top: 0px;
+}
+
+.home-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Card Images */
+.home-card-img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 12px;
+  aspect-ratio: 9 / 16;
+}
+
+.carousel {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  margin: 20px 0;
+  padding: 10px 0;
+}
+
+.carousel-button {
+  transition: background-color 0.3s;
+  background-color: #00c8a8;
+  border: none;
+  border-radius: 50%;
+  padding: 10px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.carousel-button:hover {
+  background-color: #00997f;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .editors-choice-placeholder {
+    padding: 30px;
+    font-size: 0.9rem;
+  }
+
+  .card-grid {
+    flex-wrap: wrap;
+  }
+
+  .home-card {
+    flex: 1 1 calc(50% - 1rem);
+  }
+
+  .home-card-img {
+    height: auto;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1200px) {
+  .card-grid {
+    flex-wrap: wrap;
+  }
+
+  .home-card {
+    flex: 1 1 calc(20% - 1rem);
+  }
+
+  .home-card-img {
+    height: auto;
+  }
+}
+
+@media (min-width: 1201px) {
+  .card-grid {
+    flex-wrap: wrap;
+  }
+
+  .home-card {
+    flex: 1 1 calc(12.5% - 1rem);
+  }
+
+  .home-card-img {
+    height: auto;
+  }
+}

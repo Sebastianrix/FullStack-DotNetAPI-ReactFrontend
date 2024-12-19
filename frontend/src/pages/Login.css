@@ -1,0 +1,124 @@
+.modal-header {
+  margin-top: 0;
+}
+
+.modal-body {
+  padding-top: 0;
+}
+
+.login-form {
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+}
+
+.login-submit {
+  width: 90%;
+  margin-top: 30px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  background-color: #00c8a8;
+  color: black;
+  border: none;
+  padding: 5px;
+}
+
+.login-submit:hover {
+  background-color: #00997f;
+}
+
+.login-input {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.login-label {
+  margin-bottom: 10px;
+  margin-top: 10px;
+  width: 90%;
+}
+
+.login-input:disabled {
+  background-color: #e0e0e0;
+  color: #a0a0a0;
+  cursor: not-allowed;
+}
+
+.login-submit:disabled {
+  background-color: #cccccc;
+  color: white;
+  cursor: not-allowed;
+}
+
+.full-page-form-container {
+  color: black;
+}
+
+.full-page-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+
+}
+
+.full-page-form {
+  width: 400px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.full-page-form input {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+input[type="checkbox"] {
+  width: 20px; 
+  height: 20px;
+  margin-right: 10px;
+  accent-color: #00c8a8;
+  border: 2px solid #00c8a8;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+input[type="checkbox"]:hover {
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.full-page-form button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #00c8a8;
+  color: black;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.full-page-form button:hover {
+  background-color: #00997f;
+}
+
+.full-page-form-header {
+    width: 100%;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: bold; 
+}
+

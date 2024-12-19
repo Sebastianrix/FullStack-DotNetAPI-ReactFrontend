@@ -1,0 +1,53 @@
+/* Overall modal styling */
+.bookmark-modal .modal-content {
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border: none;
+  background-color: #f9f9f9;
+}
+
+/* Header styling */
+.bookmark-title {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+/* Body styling */
+.bookmark-message {
+  text-align: center;
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.bookmark-label {
+  font-weight: 600;
+  color: #555;
+}
+
+.bookmark-input {
+  border-radius: 8px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  min-height: 100px;
+  max-height: 300px;
+  line-height: 1.5;
+}
+
+/* Modal animation */
+.bookmark-modal .modal-dialog {
+  transform: translateY(-20px);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.bookmark-modal.show .modal-dialog {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.bookmark-style.disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+}

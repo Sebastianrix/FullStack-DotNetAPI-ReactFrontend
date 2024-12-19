@@ -1,0 +1,81 @@
+datalayer/bin/
+datalayer/obj/
+webapi/bin/
+webapi/obj/
+tests/bin/
+tests/obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# ASP.NET
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+project.lock.json
+project.fragment.lock.json
+
+# Backup & Report files
+*.bak
+*.dmp
+*.log
+*.log.xml
+*.tlog
+*.wrn
+*.err
+*.csv
+*.out
+*.published
+*.publishsettings
+
+# Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+*.DotSettings
+
+# Web files
+node_modules/
+bower_components/
+jspm_packages/
+
+# CodeRush
+*.cr
+
+# NCrunch
+_NCrunch_*
+.*crunch*.local.xml
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# SQL Server files
+*.mdf
+*.ldf
+
+# Azure
+local.settings.json
+**local.settings.json
+.vs/cit13_portfolioproject2/DesignTimeBuild/.dtbcache.v2
+/.vs
+.fake
