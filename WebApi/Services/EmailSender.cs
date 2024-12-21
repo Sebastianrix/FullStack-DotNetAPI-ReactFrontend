@@ -10,15 +10,18 @@ namespace WebApi.Services
             var mail = "RealEmailAdress@outlook.com";
             var pw = "Password123";
 
-            var client = new SmtpClient()
+            var client = new SmtpClient("smtp.office365.com",587)
             {
                 EnableSsl = true,
+                UseDefaultCredentials = false,
                 Credentials = new NetworkCredential(mail, pw)
             };
 
             return client.SendMailAsync(
-                new MailMesseage()
-                );
+                new MailMesseage(from: mail,
+                ToString: email,
+                subject,
+                message));
         }
     }
 }
