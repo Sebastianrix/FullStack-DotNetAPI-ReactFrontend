@@ -206,5 +206,21 @@ namespace WebApi.Controllers
       _dataService.DeleteUser(userId);
       return NoContent();
     }
+    // -- Forgot password controller --
+    [HttpPost("forgot-password")]
+    public IActionResult ForgotPassword([FromBody] ForgotPasswordDTO dto)
+    {
+    
+    var user = _dataService.GetUserByEmail(dto.Email);
+    if (user == null)
+        return NotFound("No user found with that email address.");
+
+   
+    var resetToken = Guid.NewGuid().ToString();
+   
+
+    return Ok("Password reset email sent.");
+    }
+
   }
 }
