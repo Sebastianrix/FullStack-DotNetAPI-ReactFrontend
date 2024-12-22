@@ -92,10 +92,13 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddScoped<IDataService, DataService>();
 
-// Added email service
+// Email settings
+builder.Services.Configure<EmailSettings>(
+    builder.Configuration.GetSection("EmailSettings"));
+
+
+// Email service
 builder.Services.AddTransient<IEmailSender, EmailSender>();
-
-
 
 
 // Mapster configuration
