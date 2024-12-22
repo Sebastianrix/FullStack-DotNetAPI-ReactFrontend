@@ -1,27 +1,37 @@
-﻿using System.Net.Mail;
+using Microsoft.Extensions.Options;
+using System.Net.Mail;
 using System.Net;
 
 namespace WebApi.Services
 {
     public class EmailSender : IEmailSender
     {
-        public Task SendEmailAsync(string email, string subject, string message) 
-        {
-            var mail = "RealEmailAdress@outlook.com";
-            var pw = "Password123";
+        private readonly EmailSettings _emailSettings;
 
-            var client = new SmtpClient("smtp.office365.com",587)
+        public EmailSender(IOptions<EmailSettings> emailSettings)
+        {
+            _emailSettings = emailSettings.Value;
+        }
+
+        public Task SendEmailAsync(string email, string subject, string message)
+        {
+            var client = new SmtpClient(_emailSettings.Host, _emailSettings.Port)
             {
-                EnableSsl = true,
+                EnableSsl = _emailSettings.EnableSsl,
                 UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(mail, pw)
+                Credentials = new NetworkCredential(_emailSettings.Mail, _emailSettings.Password)
             };
 
-            return client.SendMailAsync(
-                new MailMesseage(from: mail,
-                ToString: email,
-                subject,
-                message));
+            var mailMessage = new MailMessage
+            {
+                From = new MailAddress(_emailSettings.Mail),
+                Subject = subject,
+                Body = message,
+                IsBodyHtml = true,
+            };
+            mailMessage.To.Add(email);
+
+            return client.SendMailAsync(mailMessage);
         }
     }
 }
