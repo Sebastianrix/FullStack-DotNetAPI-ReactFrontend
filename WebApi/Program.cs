@@ -5,9 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Mapster;
 using WebApi.Services;
+using WebApi.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -93,8 +95,8 @@ builder.Services.AddCors(options =>
 builder.Services.AddScoped<IDataService, DataService>();
 
 // Email settings
-builder.Services.Configure<EmailSettings>(
-    builder.Configuration.GetSection("EmailSettings"));
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+
 
 
 // Email service
