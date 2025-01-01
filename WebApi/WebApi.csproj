@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Configuration\EmailSettings.cs" />
+
   </ItemGroup>
 
   <ItemGroup>
