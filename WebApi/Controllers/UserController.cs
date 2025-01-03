@@ -22,16 +22,17 @@ namespace WebApi.Controllers
     private readonly IConfiguration _configuration;
     private readonly IEmailSender _emailSender;
 
-    public UsersController(IDataService dataService, IConfiguration configuration, LinkGenerator linkGenerator, Hashing hashing)
-        : base(linkGenerator)
-    {
-      _configuration = configuration;
-      _dataService = dataService;
-      _hashing = hashing;
-    }
+    public UsersController(IDataService dataService, IConfiguration configuration, LinkGenerator linkGenerator, Hashing hashing, IEmailSender emailSender)
+            : base(linkGenerator)
+        {
+            _configuration = configuration;
+            _dataService = dataService;
+            _hashing = hashing;
+            _emailSender = emailSender;
+        }
 
-    // -- GET USER by ID --
-    [HttpGet("profile")]
+        // -- GET USER by ID --
+        [HttpGet("profile")]
     [Authorize]
     public IActionResult GetUser()
     {
