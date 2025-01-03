@@ -20,6 +20,7 @@ namespace WebApi.Controllers
     private readonly IDataService _dataService;
     private readonly Hashing _hashing;
     private readonly IConfiguration _configuration;
+    private readonly IEmailSender _emailSender;
 
     public UsersController(IDataService dataService, IConfiguration configuration, LinkGenerator linkGenerator, Hashing hashing)
         : base(linkGenerator)
