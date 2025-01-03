@@ -49,6 +49,25 @@ namespace WebApi.Controllers
             }
         }
 
+        [HttpPost("forgot-password")]
+        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordDTO dto)
+        {
+            var user = _dataService.GetUserByEmail(dto.Email);
+            if (user == null)
+                return NotFound("No user found with that email address.");
+
+          
+            var resetToken = Guid.NewGuid().ToString();
+
+       
+            var subject = "Password Reset";
+            var message = $"Hello {user.Username},\n\nUse this token to reset your password:\n{resetToken}\n\nRegards,\nYour App Team";
+
+          
+            await _emailSender.SendEmailAsync(dto.Email, subject, message);
+
+            return Ok("Password reset email sent.");
+        }
 
         // -- GET USER by ID --
         [HttpGet("profile")]
