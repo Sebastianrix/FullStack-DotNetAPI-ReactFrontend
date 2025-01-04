@@ -23,12 +23,15 @@ namespace WebApi.Services
             {
                 EnableSsl = _emailSettings.EnableSsl,
                 UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(_emailSettings.Mail, _emailSettings.Password)
+                Credentials = new NetworkCredential(
+                    _emailSettings.Username,  
+                    _emailSettings.Password   
+                )
             };
 
             var mailMessage = new MailMessage
             {
-                From = new MailAddress(_emailSettings.Mail),
+                From = new MailAddress(_emailSettings.FromAddress),
                 Subject = subject,
                 Body = message,
                 IsBodyHtml = true,
