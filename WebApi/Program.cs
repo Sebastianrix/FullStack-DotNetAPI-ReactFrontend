@@ -13,7 +13,7 @@ using System.Text;
 
 
 var builder = WebApplication.CreateBuilder(args);
-
+Console.WriteLine($"Environment: {builder.Environment.EnvironmentName}");
 // Add logging
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
@@ -23,6 +23,13 @@ builder.Services.AddMapster();
 // Add services to the container.
 // Register MovieDatabase with the dependency injection container
 var connectionString = builder.Configuration.GetConnectionString("imdbDatabase");
+Console.WriteLine($"Connection String: {connectionString}");
+
+foreach (var kvp in builder.Configuration.AsEnumerable())
+{
+    Console.WriteLine($"{kvp.Key}: {kvp.Value}");
+}
+
 if (string.IsNullOrEmpty(connectionString))
 {
   throw new InvalidOperationException("The ConnectionString property has not been initialized.");
