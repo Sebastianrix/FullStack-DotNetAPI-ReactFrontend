@@ -180,16 +180,16 @@ namespace WebApi.Controllers
 
         // -- LOGIN USER --
         [HttpPut("login")]
-        public IActionResult Login(LoginUserModel model)
+        public IActionResult Login(LoginUserDTO dto)
         {
-            var user = _dataService.GetUser(model.UserName);
+            var user = _dataService.GetUser(dto.UserName);
 
             if (user == null)
             {
                 return BadRequest("Can't login. Password or Username is wrong.");
             }
 
-            if (!_hashing.Verify(model.Password, user.Password, user.Salt))
+            if (!_hashing.Verify(dto.Password, user.Password, user.Salt))
             {
                 return BadRequest("Couldn't verify.");
             }

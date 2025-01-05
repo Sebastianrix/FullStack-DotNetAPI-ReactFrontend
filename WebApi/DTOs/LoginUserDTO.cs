@@ -1,6 +1,6 @@
 ﻿namespace WebApi.DTOs
 {
-    public class LoginUserModel
+    public class LoginUserDTO
     {
       //  public string Name { get; set; }
         public string? UserName { get; set; }
