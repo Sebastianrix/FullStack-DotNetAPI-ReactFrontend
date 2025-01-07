@@ -67,6 +67,34 @@ namespace WebApi.Controllers
             return Ok("Password reset email sent.");
         }
 
+        [HttpPost("send-welcome-email")]
+        public async Task<IActionResult> SendWelcomeEmail([FromBody] string email)
+        {
+            try
+            {
+                var user = _dataService.GetUserByEmail(email);
+                if (user == null)
+                    return NotFound("No user found with that email address.");
+
+                var subject = "Welcome to Our Service!";
+                var message = $"Hello {user.Username},\n\n" +
+                              "Welcome! We're happy to have you here.\n\n" +
+                              "Here are some tips to get started:\n" +
+                              "- Stay cool\n" +
+                              "- Keep coding\n\n" +
+                              "Feel free to explore.\n\n" +
+                              "Best Regards,\nSebastian Rix";
+
+                await _emailSender.SendEmailAsync(email, subject, message);
+
+                return Ok($"Welcome email sent to {email}!");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred while sending the welcome email: {ex.Message}");
+            }
+        }
+
 
     }
 }
