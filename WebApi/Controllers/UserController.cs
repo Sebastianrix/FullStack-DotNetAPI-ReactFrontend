@@ -31,43 +31,6 @@ namespace WebApi.Controllers
             _emailSender = emailSender;
         }
 
-        [HttpPost("send-test-email")]
-        public async Task<IActionResult> SendTestEmail([FromBody] string email)
-        {
-            try
-            {
-                await _emailSender.SendEmailAsync(email,
-                                                  "Hello from server!",
-                                                  "This is a test mail");
-
-                return Ok($"Test email sent to {email}!");
-            }
-            catch (Exception ex)
-            {
-
-                return StatusCode(500, $"An error occurred while sending email: {ex.Message}");
-            }
-        }
-
-        [HttpPost("forgot-password")]
-        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordDTO dto)
-        {
-            var user = _dataService.GetUserByEmail(dto.Email);
-            if (user == null)
-                return NotFound("No user found with that email address.");
-
-
-            var resetToken = Guid.NewGuid().ToString();
-
-
-            var subject = "Password Reset";
-            var message = $"Hello {user.Username},\n\nUse this token to reset your password:\n{resetToken}\n\nRegards,\nYour App Team";
-
-
-            await _emailSender.SendEmailAsync(dto.Email, subject, message);
-
-            return Ok("Password reset email sent.");
-        }
 
         // -- GET USER by ID --
         [HttpGet("profile")]
