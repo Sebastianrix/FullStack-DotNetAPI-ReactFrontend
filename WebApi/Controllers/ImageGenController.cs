@@ -1,3 +1,13 @@
+using Microsoft.AspNetCore.Mvc;
+using WebApi.DTOs;
+using DataLayer;
+using Mapster;
+using System;
+using DataLayer.Models;
+
+namespace WebApi.Controllers
+{
+
 [ApiController]
 [Route("api/[controller]")]
 public class ImageGenController : ControllerBase
@@ -32,4 +42,6 @@ public class GenerateRequest
 public class GenerateResponse
 {
     public string Image { get; set; } // base64-encoded PNG
+}
+
 }
