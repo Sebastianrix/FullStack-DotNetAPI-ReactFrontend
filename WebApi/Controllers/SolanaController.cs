@@ -1,14 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Solnet.Rpc;
+using Solnet.Rpc.Models;
 using Solnet.Programs;
 using Solnet.Wallet;
 using Solnet.Wallet.Bip39;
 using Solnet.Rpc.Builders;
-using System.Net.Http;
-using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
-using System.Collections.Generic;
+using Solnet.Rpc.Types;
+
 
 namespace WebApi.Controllers
 {
@@ -16,19 +15,29 @@ namespace WebApi.Controllers
     [Route("api/v3/solana")]
     public class SolanaController : ControllerBase
     {
+        // 🪙 Replace these values with your actual info
         private const string TokenMintAddress = "J4Bozua2rBCEU3C5kx8pAvuBgJrviaoLXvA5C9nzG3uP";
         private const string RecipientWalletAddress = "J4Bozua2rBCEU3C5kx8pAvuBgJrviaoLXvA5C9nzG3uP";
-        private const string Mnemonic = "police ball tourist surround tag slogan design crawl atom echo find hope";
+        private const string Mnemonic = "other usual sleep agent endless member regret sick obvious network book clean";
 
         private readonly IRpcClient _rpcClient = ClientFactory.GetClient(Cluster.DevNet);
-        private static readonly HttpClient _httpClient = new HttpClient();
-        private const string SolanaRpcUrl = "https://api.devnet.solana.com";
 
         [HttpGet("wallet-balance")]
         public async Task<IActionResult> GetWalletBalance()
         {
-            var balance = await GetTokenBalanceManualAsync(RecipientWalletAddress, TokenMintAddress);
-            return Ok(new { balance });
+            var result = await _rpcClient.GetTokenAccountsByOwnerAsync(
+                RecipientWalletAddress,
+                new TokenAccountsFilter
+                {
+                    Mint = TokenMintAddress
+                }
+            );
+
+            if (!result.WasSuccessful || result.Result?.Value == null || result.Result.Value.Count == 0)
+                return Ok(new { balance = 0 });
+
+            var tokenAmount = result.Result.Value[0].Account.Data.Parsed.Info.TokenAmount;
+            return Ok(new { balance = tokenAmount.UiAmountString });
         }
 
         [HttpPost("mint-10")]
@@ -39,7 +48,11 @@ namespace WebApi.Controllers
 
             var mintPubKey = new PublicKey(TokenMintAddress);
             var recipientPubKey = new PublicKey(RecipientWalletAddress);
+
+            // Create the associated token account (ATA) if it doesn't exist
             var ata = AssociatedTokenAccountProgram.DeriveAssociatedTokenAccount(recipientPubKey, mintPubKey);
+
+            // Safe to assume it's already created if it's been used once; otherwise, you'd need to handle creation
 
             var blockHash = (await _rpcClient.GetLatestBlockHashAsync()).Result.Value.Blockhash;
 
@@ -49,10 +62,10 @@ namespace WebApi.Controllers
                 .AddInstruction(TokenProgram.MintTo(
                     mintPubKey,
                     ata,
-                    10_000_000, // 10 tokens if 6 decimals
+                    10_000_000, // = 10 tokens (adjust decimals)
                     sender))
                 .Build(sender);
-            Console.WriteLine("Sender pubkey (from mnemonic): " + sender.PublicKey);
+
             var result = await _rpcClient.SendTransactionAsync(tx);
 
             return Ok(new
@@ -63,74 +76,5 @@ namespace WebApi.Controllers
             });
         }
 
-        private async Task<decimal> GetTokenBalanceManualAsync(string owner, string mint)
-        {
-            var requestBody = new
-            {
-                jsonrpc = "2.0",
-                id = 1,
-                method = "getTokenAccountsByOwner",
-                @params = new object[]
-                {
-                    owner,
-                    new { mint },
-                    new { encoding = "jsonParsed" }
-                }
-            };
-
-            var httpContent = new StringContent(JsonSerializer.Serialize(requestBody), Encoding.UTF8, "application/json");
-            var httpResponse = await _httpClient.PostAsync(SolanaRpcUrl, httpContent);
-
-            if (!httpResponse.IsSuccessStatusCode) return 0;
-
-            var json = await httpResponse.Content.ReadAsStringAsync();
-            var response = JsonSerializer.Deserialize<RpcTokenAccountsResponse>(json);
-
-            if (response == null || response.result == null || response.result.value == null || response.result.value.Count == 0)
-                return 0;
-
-            var amountStr = response.result.value[0].account.data.parsed.info.tokenAmount.uiAmountString;
-            return decimal.Parse(amountStr);
-        }
-
-        public class RpcTokenAccountsResponse
-        {
-            public Result result { get; set; }
-
-            public class Result
-            {
-                public List<Value> value { get; set; }
-            }
-
-            public class Value
-            {
-                public Account account { get; set; }
-            }
-
-            public class Account
-            {
-                public Data data { get; set; }
-            }
-
-            public class Data
-            {
-                public Parsed parsed { get; set; }
-            }
-
-            public class Parsed
-            {
-                public Info info { get; set; }
-            }
-
-            public class Info
-            {
-                public TokenAmount tokenAmount { get; set; }
-            }
-
-            public class TokenAmount
-            {
-                public string uiAmountString { get; set; }
-            }
-        }
     }
 }
