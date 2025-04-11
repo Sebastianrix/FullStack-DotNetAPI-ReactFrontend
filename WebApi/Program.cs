@@ -87,6 +87,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 
+// adding solana stuff
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+
+
+
 // added CORS-service to apllow requests from React-app (localhost:5173)
 builder.Services.AddCors(options =>
 {
