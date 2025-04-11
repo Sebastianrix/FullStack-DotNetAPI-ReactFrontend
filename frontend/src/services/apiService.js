@@ -1,5 +1,5 @@
-const baseURL = "http://localhost:5003/api";
-// const baseURL = "https://localhost:5003/api";
+//const baseURL = "http://localhost:5003/api";
+ const baseURL = "https://localhost:5003/api";
 const userBaseURL = `${baseURL}/v3/user`;
 
 // Function to register a user
