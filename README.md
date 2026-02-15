@@ -12,6 +12,6 @@ npm start
 Run backend by lanching WepAPI
 
 
-Format Database with CreateDatabase.SQL file
+Format Database with create_sql file (being moved atm)
 
 
